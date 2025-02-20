@@ -1,11 +1,11 @@
-import { linkedList } from "./linkedList";
+import { linkedList } from "./linkedList.js";
 
 class hashMap {
     constructor(loadFactor, capacity){
         this.loadFactor = loadFactor;
         this.capacity = capacity;
         
-        let array = [];
+        this.buckets = [];
     };
     hash(key) {
         let hashCode = 0;
@@ -15,21 +15,11 @@ class hashMap {
           hashCode = primeNumber * hashCode + key.charCodeAt(i);
         };
      
-        return hashCode;
+        return hashCode % this.capacity;
       };
-    set(key,value) {
+    set(value, key) {
         // iterate through all the nodes to see if the key name matches.
-        let hashCode = this.hash(key);
-            if(this.array.length > 0){
-                let i = 0;
-                for(let i = 0; i < array.length; i++){
-                    // if the key exists, overwrite the value with the new value
-                    if(hashCode==array[i]){
-                        array[i].value = value;
-                    }
-                }
-
-            }
+        // if the key exists, overwrite the value with the new value
         // if it does not, just add the key and bucket.
         // check to see if the array load factor has been reached, if it has, double the capacity.
     };
