@@ -109,6 +109,9 @@ class Node {
         this.nextNode = null;
         this.key = key;
     }
+    key(){
+        return this.key;
+    }
     value(){
         return this.value;
     }
