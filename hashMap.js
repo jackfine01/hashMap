@@ -14,7 +14,9 @@ class hashMap {
         return hashCode;
       };
     set(key,value) {
-
+        // iterate through all the nodes to see if the key name matches.
+        // if the key exists, overwrite the value with the new value
+        //
     };
     get(key) {
 
@@ -41,3 +43,5 @@ class hashMap {
 
     };
 };
+
+export { hashMap };

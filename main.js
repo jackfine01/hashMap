@@ -1,4 +1,6 @@
-const test = new HashMap() // or HashMap() if using a factory
+import { hashMap } from "./hashMap"
+
+const test = new hashMap() // or HashMap() if using a factory
 
 test.set('apple', 'red')
 test.set('banana', 'yellow')
