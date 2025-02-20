@@ -104,8 +104,8 @@ class linkedList {
 export{linkedList}
 
 class Node {
-    constructor(key, value, nextNode) {
-        this.value = null;
+    constructor(value, key, nextNode) {
+        this.value = value;
         this.nextNode = null;
         this.key = key;
     }
