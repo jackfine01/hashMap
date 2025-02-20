@@ -1,8 +1,10 @@
-import { hashMap } from "./hashMap"
+import { hashMap } from "./hashMap.js"
 
-const test = new hashMap() // or HashMap() if using a factory
-
+const test = new hashMap(0.75,10) // or HashMap() if using a factory
+console.log(test)
 test.set('apple', 'red')
+console.log(test)
+console.log(test.buckets)
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
@@ -14,3 +16,4 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
+console.log(test)
