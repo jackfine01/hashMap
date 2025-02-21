@@ -34,14 +34,12 @@ class hashMap {
               list.append( key , value );
               this.buckets[hashCode] = list;
             }
-      // check to see if the array load factor has been reached, if it has, double the capacity.
         let size = 0;
         for(let i = 0; i < this.buckets.length; i++){
           if(this.buckets[i]!=undefined){
             size++;
           }
         }
-        // console.log(size + ' ' + this.capacity)
         let capCheck = size / this.capacity;
 
         if(capCheck > this.loadFactor){
@@ -62,10 +60,23 @@ class hashMap {
         }
     };
     get(key) {
-
+      let hashCode = this.hash(key);
+      let hashIndex = this.buckets[hashCode];
+        if(hashIndex != undefined){
+          let index = hashIndex.findKey(key);
+          return hashIndex.valueAt(index);
+        }else{
+          return null;
+        }
     };
     has(key) {
-
+      let hashCode = this.hash(key);
+      let hashIndex = this.buckets[hashCode];
+        if(hashIndex != undefined){
+          return hashIndex.containsKey(key);
+        }else{
+          return false;
+        }
     };
     remove() {
 
