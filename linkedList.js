@@ -51,6 +51,13 @@ class linkedList {
         }
         return current;
     }
+    valueAt(index){
+        let current = this.head;
+        for(let i = 0; i < index; i++){
+            current = current.nextNode;
+        }
+        return current.value;
+    }
     pop(){
         if(this.size > 1){
             let current = this.head();
