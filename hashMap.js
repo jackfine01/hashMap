@@ -15,15 +15,15 @@ class hashMap {
           hashCode = primeNumber * hashCode + key.charCodeAt(i);
         };
      
-        return hashCode % this.capacity;
+        return hashCode;
       };
     set(key, value) {
-      let hashCode = this.hash(key);
+      let hashCode = this.hash(key) % this.capacity;
       let hashIndex = this.buckets[hashCode];
           if(hashIndex != undefined){
             let contains = this.buckets[hashCode].containsKey(key);
               if(contains == true){
-                index = this.buckets[hashCode].find(key)
+                let index = this.buckets[hashCode].findKey(key)
                 this.buckets[hashCode].at(index).value = value;
               }
               else if(contains == false){
