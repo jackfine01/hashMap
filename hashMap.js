@@ -14,11 +14,10 @@ class hashMap {
         for (let i = 0; i < key.length; i++) {
           hashCode = primeNumber * hashCode + key.charCodeAt(i);
         };
-     
-        return hashCode;
+        return hashCode % this.buckets.length;
       };
     set(key, value) {
-      let hashCode = this.hash(key) % this.capacity;
+      let hashCode = this.hash(key);
       let hashIndex = this.buckets[hashCode];
           if(hashIndex != undefined){
             let contains = this.buckets[hashCode].containsKey(key);
@@ -36,10 +35,31 @@ class hashMap {
               this.buckets[hashCode] = list;
             }
       // check to see if the array load factor has been reached, if it has, double the capacity.
-        let capCheck = this.buckets.length / this.capacity;
-          if(capCheck > this.loadFactor){
-            this.capacity = this.capacity*2;
+        let size = 0;
+        for(let i = 0; i < this.buckets.length; i++){
+          if(this.buckets[i]!=undefined){
+            size++;
           }
+        }
+        // console.log(size + ' ' + this.capacity)
+        let capCheck = size / this.capacity;
+
+        if(capCheck > this.loadFactor){
+
+          this.capacity = this.capacity*2;
+
+          let current = this.buckets;
+
+          this.buckets = new Array(this.capacity)
+
+          for(let i = 0; i < current.length; i++){
+            if(current[i]!=undefined){
+              for(let j = 0; j < current[i].size; j++){
+                this.set(current[i].at(j).key, current[i].at(j).value)
+              }
+            }
+          }
+        }
     };
     get(key) {
 
