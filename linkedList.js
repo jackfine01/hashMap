@@ -107,10 +107,6 @@ class Node {
     constructor(value, key, nextNode) {
         this.value = value;
         this.nextNode = null;
-        this.key = key;
-    }
-    key(){
-        return this.key;
     }
     value(){
         return this.value;
