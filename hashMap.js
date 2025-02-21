@@ -5,7 +5,7 @@ class hashMap {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
         
-        this.buckets = [];
+        this.buckets = new Array(this.capacity);
     };
     hash(key) {
         let hashCode = 0;
@@ -17,11 +17,29 @@ class hashMap {
      
         return hashCode % this.capacity;
       };
-    set(value, key) {
-        // iterate through all the nodes to see if the key name matches.
-        // if the key exists, overwrite the value with the new value
-        // if it does not, just add the key and bucket.
-        // check to see if the array load factor has been reached, if it has, double the capacity.
+    set(key, value) {
+      let hashCode = this.hash(key);
+      let hashIndex = this.buckets[hashCode];
+          if(hashIndex != undefined){
+            let contains = this.buckets[hashCode].containsKey(key);
+              if(contains == true){
+                index = this.buckets[hashCode].find(key)
+                this.buckets[hashCode].at(index).value = value;
+              }
+              else if(contains == false){
+                this.buckets[hashCode].append(key, value);
+              }
+            }
+            else if(hashIndex == undefined){
+              let list = new linkedList();
+              list.append( key , value );
+              this.buckets[hashCode] = list;
+            }
+      // check to see if the array load factor has been reached, if it has, double the capacity.
+        let capCheck = this.buckets.length / this.capacity;
+          if(capCheck > this.loadFactor){
+            this.capacity = this.capacity*2;
+          }
     };
     get(key) {
 
