@@ -4,9 +4,10 @@ class linkedList {
         this.tail = null;
         this.size = 0;
     }
-    append(value){
+    append(key, value){
         let node = new Node();
         let current;
+        node.key = key
         node.value = value;
         if (this.tail == null && this.head == null){
             this.head = node;
@@ -102,6 +103,16 @@ class linkedList {
             console.log("Index of " + value + ": " + index)
             return index;
     }
+    findKey(key){
+        let current = this.head;
+        let index = 0;
+            while(current.key != key && current.key != null){
+                index++;
+                current = current.nextNode;
+            }
+            console.log("Index of " + key + ": " + index)
+            return index;
+    }
     toString(){
         let current = this.head;
         let string = "";
@@ -116,10 +127,10 @@ class linkedList {
 export{linkedList}
 
 class Node {
-    constructor(value, key, nextNode) {
-        this.value = null;
+    constructor(key, value, nextNode) {
+        this.value = value;
         this.nextNode = null;
-        this.key = null;
+        this.key = key;
     }
     key(){
         return this.key;
