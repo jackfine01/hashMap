@@ -20,7 +20,7 @@ class linkedList {
         this.size++;
     }
     prepend(value){
-        let node = new Node(element);
+        let node = new Node();
         let current;
         node.value = value;
         if (this.head == null){
@@ -48,7 +48,7 @@ class linkedList {
         for(let i = 0; i < index; i++){
             current = current.nextNode;
         }
-        return current.value;
+        return current;
     }
     pop(){
         if(this.size > 1){
@@ -80,6 +80,18 @@ class linkedList {
             }
         return isIn;
         }
+    containsKey(key){
+        let current = this.head;
+        let isIn = false;
+            while(current != null){
+                if(current.key == key){
+                    console.log('key: '+ current.key)
+                    isIn = true;
+                }
+                current = current.nextNode;
+            }
+        return isIn;
+        }
     find(value){
         let current = this.head;
         let index = 0;
@@ -105,8 +117,9 @@ export{linkedList}
 
 class Node {
     constructor(value, key, nextNode) {
-        this.value = value;
+        this.value = null;
         this.nextNode = null;
+        this.key = null;
     }
     key(){
         return this.key;
