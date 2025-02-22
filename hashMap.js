@@ -16,6 +16,15 @@ class hashMap {
         };
         return hashCode % this.buckets.length;
       };
+    rehash(current){
+      for(let i = 0; i < current.length; i++){
+        if(current[i]!=undefined){
+          for(let j = 0; j < current[i].size; j++){
+            this.set(current[i].at(j).key, current[i].at(j).value)
+          }
+        }
+      }
+    }
     set(key, value) {
       let hashCode = this.hash(key);
       let hashIndex = this.buckets[hashCode];
@@ -43,20 +52,10 @@ class hashMap {
         let capCheck = size / this.capacity;
 
         if(capCheck > this.loadFactor){
-
           this.capacity = this.capacity*2;
-
           let current = this.buckets;
-
           this.buckets = new Array(this.capacity)
-
-          for(let i = 0; i < current.length; i++){
-            if(current[i]!=undefined){
-              for(let j = 0; j < current[i].size; j++){
-                this.set(current[i].at(j).key, current[i].at(j).value)
-              }
-            }
-          }
+          this.rehash(current);
         }
     };
     get(key) {
@@ -77,9 +76,6 @@ class hashMap {
         }else{
           return false;
         }
-    };
-    remove() {
-
     };
     length() {
 
