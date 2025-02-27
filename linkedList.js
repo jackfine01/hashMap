@@ -1,152 +1,189 @@
-class linkedList {
-    constructor(head, tail, size){
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
-    }
-    append(key, value){
-        let node = new Node();
-        let current;
-        node.key = key
-        node.value = value;
-        if (this.tail == null && this.head == null){
-            this.head = node;
-            this.tail = node;
-        }
-        else {
-            current = this.tail;
-            current.nextNode = node;
-            this.tail = node;
-        };
-        this.size++;
-    }
-    prepend(value){
-        let node = new Node();
-        let current;
-        node.value = value;
-        if (this.head == null){
-            this.head = node;
-            this.tail = node;
-        }
-        else{
-            current = this.head;
-            this.head = node;
-            node.nextNode = current;
-        }
-        this.size++;
-    }
-    size(){
-        return this.size;
-    }
-    head(){
-        return this.head;
-    }
-    tail(){
-        return this.tail;
-    }
-    at(index){
-        let current = this.head;
-        for(let i = 0; i < index; i++){
-            current = current.nextNode;
-        }
-        return current;
-    }
-    valueAt(index){
-        let current = this.head;
-        for(let i = 0; i < index; i++){
-            current = current.nextNode;
-        }
-        return current.value;
-    }
-    pop(){
-        if(this.size > 1){
-            let current = this.head();
-            for(let i = 0; i<size-1; i++){
-                current = this.nextNode;
-            }
-            current.nextNode = null;
-            this.size--;
-        }
-        else if(this.size == 1){
-            this.head = null;
-            this.tail = null;
-        }
-        else if(this.size == 0){
-            console.log('There are no more nodes.')
-        }
-
-    }
-    contains(value){
-        let current = this.head;
-        let isIn = false;
-            while(current != null){
-                if(current.value == value){
-                    console.log(current.value)
-                    isIn = true;
-                }
-                current = current.nextNode;
-            }
-        return isIn;
-        }
-    containsKey(key){
-        let current = this.head;
-        let isIn = false;
-            while(current != null){
-                if(current.key == key){
-                    console.log('key: '+ current.key)
-                    isIn = true;
-                }
-                current = current.nextNode;
-            }
-        return isIn;
-        }
-    find(value){
-        let current = this.head;
-        let index = 0;
-            while(current.value != value && current.value != null){
-                index++;
-                current = current.nextNode;
-            }
-            console.log("Index of " + value + ": " + index)
-            return index;
-    }
-    findKey(key){
-        let current = this.head;
-        let index = 0;
-            while(current.key != key && current.key != null){
-                index++;
-                current = current.nextNode;
-            }
-            console.log("Index of " + key + ": " + index)
-            return index;
-    }
-    toString(){
-        let current = this.head;
-        let string = "";
-
-        while (current) {
-            string += current.value + (current.nextNode ? " ->  " : "")
-            current = current.nextNode;
-        }
-        return string;
-    }
+class node
+{
+      constructor(key, value, nextNode)
+      {
+            this.key = key;
+            this.value = value;
+            this.nextNode = null;
+      }
+      key()
+      {
+            return this.key;
+      }
+      value()
+      {
+            return this.value;
+      }
+      nextNode()
+      {
+            return this.nextNode;
+      }
 }
-export{linkedList}
 
-class Node {
-    constructor(key, value, nextNode) {
-        this.value = value;
-        this.nextNode = null;
-        this.key = key;
-    }
-    key(){
-        return this.key;
-    }
-    value(){
-        return this.value;
-    }
-    nextNode(){
-        return this.nextNode;
-    }
-}
-export{Node}
+class linkedList
+{
+      constructor(head, tail, size)
+      {
+            this.head = null;
+            this.tail = null;
+            this.size = 0;
+      };
+      append(key, value)
+      {
+            let newNode = new node(key, value);
+            newNode.key = key;
+            newNode.value = value;
+            if(this.size==0)
+            {
+                  this.head = newNode;
+                  this.tail = newNode;
+            }
+            else
+            {
+            let current = this.head;
+            let previous;
+            this.head = newNode;
+            newNode.nextNode = current;
+            while(current != null)
+                  {
+                        previous = current;
+                        current = this.nextNode;
+                  }
+            }
+            this.size++;
+      };
+      head()
+      {
+            return this.head;
+      };
+      tail()
+      {
+            return this.tail;
+      };
+      size()
+      {
+            return this.size;
+      };
+      containsKey(key)
+      {
+            let contain = false;
+            let current = this.head;
+            while(current!=null)
+            {
+                  if(current.key == key)
+                        contain = true;
+                  current = current.nextNode;
+            };
+            // console.log('contains ' + key + ': ' + contain);
+            return contain;
+      };
+      containsValue(value)
+      {
+            let contain = false;
+            let current = this.head;
+            while(current!=null)
+            {
+                  if(current.value == value)
+                        contain = true;
+                  current = current.nextNode;
+            };
+            // console.log('contains ' + value + ': ' + contain);
+            return contain;
+
+      };
+      findKey(key)
+      {
+            if(this.containsKey(key)==true)
+            {
+                  let index = 0;
+                  let current = this.head;
+                  while(current.key!=key)
+                  {
+                        index++;
+                        current = current.nextNode;
+                  };
+                  // console.log('index of ' + key + ': ' +index)
+                  return index;
+            }
+            else
+                  console.log('DNE');
+      };
+      findValue(value)
+      {
+            if(this.containsValue(value)==true)
+            {
+                  let index = 0;
+                  let current = this.head;
+                  while(current.value!=value)
+                  {
+                        current = current.nextNode;
+                        index++;
+                  };
+                  // console.log('index of ' + value + ': ' +index)
+                  return index;
+            }
+            else
+            {
+                  console.log('DNE');
+            };
+
+      };
+      at(index)
+      {
+            if(index>this.size)
+            {
+                  console.log('out of bounds');
+            }
+            else
+            {
+                  let current = this.head;
+                  let count = 0;
+                  while(count != index)
+                  {
+                        current = current.nextNode;
+                        count++;
+                  };
+                  // console.log(current);
+                  return current;
+            };
+      };
+      toString()
+      {
+            let string = "";
+            let current = this.head;
+            while(current)
+            {
+                  string += " ( " + current.value + " ) ->"
+                  current = current.nextNode;
+            };
+                  string += " null";
+            // console.log(string);
+      };
+      remove(key)
+      {
+            if(!this.head)
+            {
+                  return;
+            };
+            if(this.head.key === key)
+            {
+                  this.head = this.head.nextNode;
+                  this.size--;
+                  return;
+            }
+            
+            let current = this.head;
+            while(current.nextNode)
+            {
+                  if(current.nextNode.key === key)
+                  {
+                        current.nextNode = current.nextNode.nextNode;
+                        this.size--;
+                        return;
+                  }
+                  current = current.nextNode;
+            }
+
+      };
+};
+export {linkedList}
